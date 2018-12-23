@@ -1,0 +1,77 @@
+<?php
+
+$default_msg =  "
+PINOYLANG
+version 1
+
+usage
+$ php pinoylang <input file> [-p,-o] <output file>
+
+-p Print the translated php code
+-o Put translted code into a php file
+";
+
+if(!$argv[1]){
+  print $default_msg;
+  die();
+}
+
+if($argv[1]){
+  $input_file = $argv[1];
+} else {
+  print "Error! No input file specified";
+}
+
+try {
+  $code = file_get_contents($input_file);
+} catch(Exception $e){
+  print "Error! A problem was encountered while opening the file";
+}
+
+try {
+
+  $dir_sep = DIRECTORY_SEPARATOR;
+  require_once(__DIR__.$dir_sep."class".$dir_sep."Pinoylang".$dir_sep."Translator.class.php");
+  $translator = new Pinoylang\Translator($code);
+
+  $result = $translator->translate();
+
+} catch(Exception $e){
+  print "Error! An unknown error occurred while translating.";
+}
+
+
+if(!$argv[2]){
+  
+  eval($result);
+  die("\n");
+} else {
+
+  $flag = $argv[2];
+$result = '
+<?php
+
+'.$result.'
+
+?>
+'; 
+
+  switch($flag){
+    
+    case('-p'):
+	print($result);
+	die();
+	break;
+    case('-o'):
+	$file_name = "out.php";
+	if($argv[3]) $file_name = $argv[3];
+	file_put_contents($file_name,$result);
+	die();
+	break;
+    default:
+      echo $default_msg;
+  }
+
+}
+
+?>
