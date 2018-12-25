@@ -11,12 +11,12 @@ $ php pinoylang <input file> [-p,-o] <output file>
 -o Put translted code into a php file
 ";
 
-if(!$argv[1]){
+if(@!$argv[1]){
   print $default_msg;
   die();
 }
 
-if($argv[1]){
+if(@$argv[1]){
   $input_file = $argv[1];
 } else {
   print "Error! No input file specified";
@@ -41,7 +41,7 @@ try {
 }
 
 
-if(!$argv[2]){
+if(@!$argv[2]){
   
   eval($result);
   die("\n");

@@ -1,0 +1,23 @@
+Klase Hayop {
+	
+	_lahat_ var pangalan = "Karaniwang Hayop";
+
+	_lahat_ gawain: palitanPangalan($bagong_pangalan){
+		
+		$ito->pangalan = $bagong_pangalan;
+	
+	}
+
+}
+
+gawain: sabihinAngPangalan(var pangalan){
+	sabihin("Ang aking paboritong hayop ay ".$pangalan."\n");
+}
+
+var hayop = _bago_ Hayop();
+
+sabihinAngPangalan($hayop->pangalan);
+
+$hayop->palitanPangalan("Kabayo");
+
+sabihinAngPangalan($hayop->pangalan);
