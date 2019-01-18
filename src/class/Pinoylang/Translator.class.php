@@ -34,7 +34,7 @@ class Translator {
     "isama("=>"include(",
     "kailangan("=>"kailangan(",
     '$ito'=>'$this',
-    "pangalan"=>"namespace",
+    "_pangalan_"=>"namespace",
     "_katumbas_"=>"==",
     "_hindi_katumbas_"=>"!==",
     "var "=>"$",
